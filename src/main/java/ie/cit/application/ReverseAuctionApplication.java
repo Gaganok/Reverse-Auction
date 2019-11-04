@@ -34,12 +34,6 @@ public class ReverseAuctionApplication {
 	
 	@PostConstruct
 	public void test() {
-		Job job = new Job("Job Desc");
-		Job job1 = new Job("Job Desc");
-		job = jobRepository.save(job);
-		job1 = jobRepository.save(job1);
-		Set<Job> jobSet = jobRepository.findAllPleaseByDescription("Job Desc");
-		System.out.println("Jobs with the same desc: " + jobSet.size());
 		
 	}
 }
