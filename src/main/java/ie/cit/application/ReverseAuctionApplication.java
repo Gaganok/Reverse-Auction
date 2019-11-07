@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-@SpringBootApplication(exclude = {
-		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
-})
+
+/*@SpringBootApplication(exclude = {
+        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
+})*/
+@SpringBootApplication
 @ComponentScan(basePackages={"ie.cit.*"})
 @EnableJpaRepositories(basePackages="ie.cit.repository")
 @EntityScan(basePackages="ie.cit.model")
