@@ -16,9 +16,10 @@ import ie.cit.model.Job;
 import ie.cit.repository.JobRepository;
 
 
-@SpringBootApplication(exclude = {
+/*@SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
-})
+})*/
+@SpringBootApplication
 @ComponentScan(basePackages={"ie.cit.*"})
 @EnableJpaRepositories(basePackages="ie.cit.repository")
 @EntityScan(basePackages="ie.cit.model")
