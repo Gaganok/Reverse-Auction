@@ -1,9 +1,15 @@
 package ie.cit.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Job {
@@ -18,16 +24,24 @@ public class Job {
 	@Column(name = "description")
 	private String description;
 	
-	private Job() {}
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 	
-	public Job(String description) {
-		this.description = description;
-	}
-
-	public Job(long id, String description) {
+	@OneToMany(mappedBy = "job")
+	private Set<Bid> bids;
+	
+	@Column(name = "active")
+	private boolean active;
+	
+	public Job() {}
+	
+	public Job(String description, User user, Set<Bid> bids, boolean active) {
 		super();
-		this.id = id;
 		this.description = description;
+		this.user = user;
+		this.bids = bids;
+		this.active = active;
 	}
 
 	public long getId() {
@@ -46,15 +60,41 @@ public class Job {
 		this.description = description;
 	}
 
-	public String getName() {
-		return name;
+
+
+
+
+
+
+
+
+	
+	
+
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
-	
+
+	public Set<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(Set<Bid> bids) {
+		this.bids = bids;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 }
 
