@@ -9,15 +9,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 
-/*@SpringBootApplication(exclude = {
+@SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
-})*/
-@SpringBootApplication
+        //,org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class
+})
 @ComponentScan(basePackages={"ie.cit.*"})
 @EnableJpaRepositories(basePackages="ie.cit.repository")
 @EntityScan(basePackages="ie.cit.model")
 @EnableScheduling
-
 public class ReverseAuctionApplication {
 
 	public static void main(String[] args) {

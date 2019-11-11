@@ -10,8 +10,7 @@ import ie.cit.repository.UserRepository;
 public class UserService {
 	@Autowired private UserRepository userRepository;
 	
-	public void createUser(User user) {
-		userRepository.save(user);
-		
+	public User createUser(User user) {
+		return userRepository.save(user);
 	}
 }

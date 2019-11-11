@@ -36,6 +36,7 @@ public class ControllerTT {
 	public String processRegistrationForm(ModelAndView modelAndView, UserForm userForm) {
 		User user = new User(userForm);
 		userService.createUser(user);
+		
 		return "login";
 	}
 	
