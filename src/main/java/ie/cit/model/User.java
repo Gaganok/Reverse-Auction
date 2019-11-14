@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import ie.cit.model.form.UserForm;
+
 @Entity
 public class User {
 
@@ -22,7 +24,7 @@ public class User {
 	@GeneratedValue
 	private long id;
 
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@JsonIgnore

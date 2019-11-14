@@ -57,7 +57,7 @@ public class ReverseAuctionApplication {
 		user1.setRole(admin, role);
 		user1 = userRepository.save(user1);
 		
-		Job job = new Job("Job Desc", user, null, true);
+		Job job = new Job("Name", "Job Desc", user, null, true);
 		job = jobRepository.save(job);
 		Bid bid = new Bid(user1, job, 100.0f);
 		bid = bidRepository.save(bid);

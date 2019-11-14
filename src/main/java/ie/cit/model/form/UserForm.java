@@ -1,4 +1,4 @@
-package ie.cit.model;
+package ie.cit.model.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

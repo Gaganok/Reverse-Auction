@@ -43,8 +43,9 @@ public class Job {
 	
 	public Job() {}
 	
-	public Job(String description, User user, Set<Bid> bids, boolean active) {
+	public Job(String name, String description, User user, Set<Bid> bids, boolean active) {
 		super();
+		this.name = name;
 		this.description = description;
 		this.user = user;
 		this.bids = bids;
@@ -67,17 +68,13 @@ public class Job {
 		this.description = description;
 	}
 
+	public String getName() {
+		return name;
+	}
 
-
-
-
-
-
-
-
-	
-	
-
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public User getUser() {
 		return user;

@@ -1,14 +1,17 @@
 package ie.cit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ie.cit.model.Job;
 import ie.cit.model.User;
-import ie.cit.model.UserForm;
+import ie.cit.model.form.JobForm;
+import ie.cit.model.form.UserForm;
 import ie.cit.service.JobManagerService;
 import ie.cit.service.UserService;
 
@@ -20,9 +23,14 @@ public class ControllerTT {
 	@Autowired private UserService userService;
 	
 	@RequestMapping(value="/login")
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}	
+	
+	@RequestMapping(value="/")
+	public ModelAndView forwardHome() {
+		return new ModelAndView("forward:/home");
+	}
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView  showRegistrationPage(ModelAndView modelAndView, UserForm userForm) {
@@ -32,14 +40,31 @@ public class ControllerTT {
 	}
 	
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
-	public String processRegistrationForm(ModelAndView modelAndView, UserForm userForm) {
+	public String processRegistrationForm(UserForm userForm) {
 		User user = new User(userForm);
 		userService.createUser(user);
 		return "login";
 	}
 	
 	@RequestMapping(value="/home", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model model, Authentication authentication) {
+		model.addAttribute("userName", authentication.getName().toString());
+		return "home";
+	}
+	
+	@RequestMapping(value = "/job", method = RequestMethod.GET)
+	public ModelAndView job(ModelAndView modelAndView, JobForm jobForm) {
+		modelAndView.addObject("job", jobForm);
+		modelAndView.setViewName("job");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/job", method = RequestMethod.POST)
+	public String process_job(JobForm jobForm, Authentication auth) {
+		Job job = jobForm.getJob();
+		User user = userService.findUserByUserName(auth.getName().toString());
+		job.setUser(user);
+		jobService.addJob(job);
 		return "home";
 	}
 	
