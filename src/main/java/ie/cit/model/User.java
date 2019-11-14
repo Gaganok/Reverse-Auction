@@ -3,6 +3,7 @@ package ie.cit.model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class User {
@@ -21,9 +25,11 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
+	@JsonIgnore
 	@Column(name = "password")
 	private String password;
-
+	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable( 
 			name = "users_roles", 

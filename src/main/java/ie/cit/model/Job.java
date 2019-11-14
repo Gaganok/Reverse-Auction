@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Job {
 	
@@ -24,10 +29,12 @@ public class Job {
 	@Column(name = "description")
 	private String description;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@JsonProperty("Job_User")
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "job")
 	private Set<Bid> bids;
 	

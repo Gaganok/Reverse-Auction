@@ -11,8 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import ie.cit.model.Bid;
+import ie.cit.model.Job;
 import ie.cit.model.Role;
 import ie.cit.model.User;
+import ie.cit.repository.BidRepository;
+import ie.cit.repository.JobRepository;
 import ie.cit.repository.RoleRepository;
 import ie.cit.repository.UserRepository;
 
@@ -35,6 +39,8 @@ public class ReverseAuctionApplication {
 	
 	@Autowired private UserRepository userRepository;
 	@Autowired private RoleRepository roleRepository;
+	@Autowired private BidRepository bidRepository;
+	@Autowired private JobRepository jobRepository;
 	
 	@PostConstruct
 	@Transactional
@@ -43,13 +49,17 @@ public class ReverseAuctionApplication {
 		Role role = new Role("USER");
 		role = roleRepository.save(role);
 		user.setRole(role);
-		userRepository.save(user);
+		user = userRepository.save(user);
 		
 		User user1 = new User("admin", "123");
 		Role admin = new Role("ADMIN");
 		role = roleRepository.save(admin);
 		user1.setRole(admin, role);
-		userRepository.save(user1);
+		user1 = userRepository.save(user1);
 		
+		Job job = new Job("Job Desc", user, null, true);
+		job = jobRepository.save(job);
+		Bid bid = new Bid(user1, job, 100.0f);
+		bid = bidRepository.save(bid);
 	}
 }
