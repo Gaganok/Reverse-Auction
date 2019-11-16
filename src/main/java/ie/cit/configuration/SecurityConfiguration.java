@@ -10,8 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ie.cit.service.CustomerUserDetailsService;
 
-//@EnableWebSecurity
-
 @Configuration 
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 

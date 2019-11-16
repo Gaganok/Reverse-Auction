@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+	<div class= "main_menu">
+		<h2>
+			<span th:remove="tag">Welcome </span>
+    		<small th:text="${userName}" >name</small>
+		</h2>
+		<ul>
+		  <li><a class="active" href="/home">Home</a></li>
+		  <li><a href="/job">Create Job</a></li>
+		</ul>
+	</div>
+	
+	<table>
+		<tbody>
+			<tr>
+				<th>ID</th>
+				<th>Job Name</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+	        	<td><span th:text="${job.id}"></span></td>
+	            <td><span th:text="${job.name}"></span></td>
+	            <td><span th:text="${job.description}"></span></td>
+	        </tr>
+	        <tr>
+				<th>User ID</th>
+				<th>User Email</th>
+			</tr>
+			<tr>
+				<td><span th:text="${job.user.id}"></span></td>
+	            <td><span th:text="${job.user.email}"></span></td>
+			</tr>
+			
+			<tr>
+				<th>Bid ID</th>
+				<th>Bid Value</th>
+				<th>User ID</th>
+				<th>User Email</th>
+			</tr>
+			<tr th:each="bid : ${job.bids}">
+	        	<td><span th:text="${bid.id}"></span></td>
+	            <td><span th:text="${bid.value}"></span></td>
+	            <td><span th:text="${bid.user.id}"></span></td>
+	            <td><span th:text="${bid.user.email}"></span></td>
+	        </tr>
+
+	    </tbody>
+	</table>
+
+</body>
+

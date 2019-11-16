@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ie.cit.model.Job;
@@ -72,4 +73,17 @@ public class ControllerTT {
 		return "redirect:/home";
 	}
 	
+	@RequestMapping(value = "/bid", method = RequestMethod.POST)
+	public String bid(@RequestParam int jobId, @RequestParam int bidValue, Authentication auth) throws Exception {
+		User user = userService.findUserByUserName(auth.getName().toString());
+		//jobService.updateBid(jobId, bidValue, user);
+		return "/home";
+	}
+	
+	@RequestMapping(value = "/jobdetails", method = RequestMethod.POST)
+	public String jobDetails(Model model, @RequestParam long jobId) throws Exception {
+		Job job = jobService.findById(jobId);
+		model.addAttribute("job", job);
+		return "jobdetails";
+	}
 }

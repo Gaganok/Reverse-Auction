@@ -1,5 +1,6 @@
 package ie.cit.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -36,19 +35,24 @@ public class Job {
 	
 	@JsonBackReference
 	@OneToMany(mappedBy = "job")
-	private Set<Bid> bids;
+	private Set<Bid> bids = new HashSet<Bid>();
+	
+	@JsonProperty("Current_Lowest_Bid")
+	@OneToOne()
+	@JoinColumn(name = "bid_id", referencedColumnName = "id")
+	private Bid lowest_bid;
 	
 	@Column(name = "active")
 	private boolean active;
 	
 	public Job() {}
 	
-	public Job(String name, String description, User user, Set<Bid> bids, boolean active) {
+	public Job(String name, String description, User user, Bid lowest_bid, boolean active) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.user = user;
-		this.bids = bids;
+		this.lowest_bid = lowest_bid;
 		this.active = active;
 	}
 
@@ -100,5 +104,14 @@ public class Job {
 		this.active = active;
 	}
 
+	public Bid getLowest_bid() {
+		return lowest_bid;
+	}
+
+	public void setLowest_bid(Bid lowest_bid) {
+		this.lowest_bid = lowest_bid;
+	}
+
+	
 }
 

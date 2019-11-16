@@ -3,21 +3,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" />
 </head>
 <body>
-	<div class= "main_menu">
+	<div class="main_menu">
 		<h2>
-			<span th:remove="tag">Welcome </span>
-    		<small th:text="${userName}" >name</small>
+			<span th:remove="tag">Welcome </span> <small th:text="${userName}">name</small>
 		</h2>
 		<ul>
-		  <li><a class="active" href="/home">Home</a></li>
-		  <li><a href="/job">Create Job</a></li>
+			<li><a class="active" href="/home">Home</a></li>
+			<li><a href="/job">Create Job</a></li>
 		</ul>
 	</div>
-	
+
 	<table>
 		<tbody>
 			<tr>
@@ -25,43 +26,55 @@
 				<th>Job Name</th>
 				<th>Description</th>
 			</tr>
-			
-    		<tr th:if="${jobs.isEmpty()}">
-            	<td colspan="2"> No Books Available </td>
-	        </tr>
-	        <tr th:each="job : ${jobs}">
-	        	<td><span th:text="${job.id}"></span></td>
-	            <td><span th:text="${job.name}"></span></td>
-	            <td><span th:text="${job.description}"></span></td>
-	        </tr>
-	        
-	        <tr id="hide">
-				<td>
-					<label>Bid: <input type="text" name="bid"/></label>
-				</td>
+
+			<tr  th:if="${jobs.isEmpty()}">
+				<td colspan="2">No Jobs Available</td>
 			</tr>
-	    </tbody>
+			<tr class= "item" th:each="job : ${jobs}">
+				<td><span th:text="${job.id}"></span></td>
+				<td><span th:text="${job.name}"></span></td>
+				<td><span th:text="${job.description}"></span></td>
+			</tr>
+
+			<tr id="hide">
+				<td><label>Bid: <input id="bid" type="text" name="bid" /></label>
+				</td>
+				<td><input id="bid_submit" type="button" value="Submit Bid"></input></td>
+			</tr>
+		</tbody>
 	</table>
-	
-	
-	
+
+
+
 	<script type="text/javascript">
-	
-		var bid_cont = $("#hide");
-		
 		$("tr").click(function() {
-	
-			if($("#hide").is(":hidden") || !($(".active_tr").is($(this)))){
-				$(".active_tr").removeClass("active_tr");
-				$(this).addClass("active_tr");
-				$(this).after($("#hide"));
-				$("#hide").show(200);
-			} else {
-				$("#hide").hide(200);
-			}
+			/* $.redirect("/jobdetails", {
+				jobId : $(this).find("td:eq(0)").text()
+			}); */
+			$.redirectPost("/jobdetails", {jobId: $(this).find("td:eq(0)").text()});
+			console.log("Clicked");
 		});
 		
+		$(".item").mouseenter(function() {
+			$(this).addClass("active_tr");
+			$(this).after($("#hide"));
+			$("#hide").show(200);
+		});
+		
+		$(".item").mouseleave(function() {
+			$("#hide").hide(200);
+			$(".active_tr").removeClass("active_tr");
+		});
+		
+		$.extend({
+			redirectPost: function(location, args){
+		        var form = '';
+		        $.each( args, function( key, value ) {
+		            form += '<input type="hidden" name="'+key+'" value="'+value+'">';
+		        });
+		        $('<form action="'+location+'" method="POST">'+form+'</form>').appendTo('body').submit();
+		    }
+		});
 	</script>
-	
-</body>
 
+</body>
