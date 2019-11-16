@@ -1,5 +1,8 @@
 package ie.cit.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,12 @@ public class JobManagerService {
 	
 	public Job addJob(Job job) {
 		return jobRepository.save(job);
+	}
+	
+	public Set<Job> findAllJob(){
+		Set<Job> jobSet = new HashSet<Job>();
+		jobRepository.findAll().forEach(jobSet::add);
+		return  jobSet;
 	}
 	
 	public void addBid() {}

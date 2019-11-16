@@ -36,7 +36,6 @@ public class ReverseAuctionApplication {
 		SpringApplication.run(ReverseAuctionApplication.class, args);
 	}
 
-	
 	@Autowired private UserRepository userRepository;
 	@Autowired private RoleRepository roleRepository;
 	@Autowired private BidRepository bidRepository;
@@ -57,7 +56,7 @@ public class ReverseAuctionApplication {
 		user1.setRole(admin, role);
 		user1 = userRepository.save(user1);
 		
-		Job job = new Job("Name", "Job Desc", user, null, true);
+		Job job = new Job("123", "123", user, null, true);
 		job = jobRepository.save(job);
 		Bid bid = new Bid(user1, job, 100.0f);
 		bid = bidRepository.save(bid);

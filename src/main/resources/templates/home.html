@@ -3,19 +3,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-	<div>
+	<div class= "main_menu">
 		<h2>
 			<span th:remove="tag">Welcome </span>
     		<small th:text="${userName}" >name</small>
 		</h2>
 		<ul>
-		  <li><a class="active" href="#home">Home</a></li>
+		  <li><a class="active" href="/home">Home</a></li>
 		  <li><a href="/job">Create Job</a></li>
 		</ul>
 	</div>
+	
+	<table>
+		<tbody>
+			<tr>
+				<th>ID</th>
+				<th>Job Name</th>
+				<th>Description</th>
+			</tr>
+			
+    		<tr th:if="${jobs.isEmpty()}">
+            	<td colspan="2"> No Books Available </td>
+	        </tr>
+	        <tr th:each="job : ${jobs}">
+	        	<td><span th:text="${job.id}"></span></td>
+	            <td><span th:text="${job.name}"></span></td>
+	            <td><span th:text="${job.description}"></span></td>
+	        </tr>
+	        
+	        <tr id="hide">
+				<td>
+					<label>Bid: <input type="text" name="bid"/></label>
+				</td>
+			</tr>
+	    </tbody>
+	</table>
+	
+	
+	
+	<script type="text/javascript">
+	
+		var bid_cont = $("#hide");
+		
+		$("tr").click(function() {
+	
+			if($("#hide").is(":hidden") || !($(".active_tr").is($(this)))){
+				$(".active_tr").removeClass("active_tr");
+				$(this).addClass("active_tr");
+				$(this).after($("#hide"));
+				$("#hide").show(200);
+			} else {
+				$("#hide").hide(200);
+			}
+		});
+		
+	</script>
 	
 </body>
 

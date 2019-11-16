@@ -1,5 +1,7 @@
 package ie.cit.controller;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,7 @@ public class ControllerTT {
 	@Autowired private UserService userService;
 	
 	@RequestMapping(value="/login")
-	public String login() {
+	public String login(Model model) {	
 		return "login";
 	}	
 	
@@ -49,6 +51,8 @@ public class ControllerTT {
 	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String home(Model model, Authentication authentication) {
 		model.addAttribute("userName", authentication.getName().toString());
+		Set<Job> jobSet = jobService.findAllJob();
+		model.addAttribute("jobs", jobSet);
 		return "home";
 	}
 	
@@ -65,7 +69,7 @@ public class ControllerTT {
 		User user = userService.findUserByUserName(auth.getName().toString());
 		job.setUser(user);
 		jobService.addJob(job);
-		return "home";
+		return "redirect:/home";
 	}
 	
 }
