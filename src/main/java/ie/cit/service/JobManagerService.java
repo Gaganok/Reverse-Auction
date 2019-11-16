@@ -1,5 +1,7 @@
 package ie.cit.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,10 @@ public class JobManagerService {
 	public void deleteJob() {}
 	public void deleteBid() {}
 	public void deactivateJob() {}
+
+	public List<Job> findAll() {
+		return jobRepository.findAll();
+		
+	}
 	
 }

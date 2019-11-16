@@ -68,4 +68,10 @@ public class ControllerTT {
 		return "home";
 	}
 	
+	@RequestMapping(value="/jobs", method = RequestMethod.GET)
+	public String returnJobs(Model model) {
+		model.addAttribute("jobs", jobService.findAll());
+		return "jobs";
+	}
+	
 }

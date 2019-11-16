@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+	<div>
+		<h2>
+			<span th:remove="tag">Welcome </span>
+    		<small th:text="${userName}" >name</small>
+		</h2>
+		<ul>
+		  <li><a class="active" href="#home">Home</a></li>
+		  <li><a href="/job">Create Job</a></li>
+		  <li><a href="/jobs">View Jobs</a></li>	
+		</ul>
+	</div>
+	<table>
+    <thead>
+        <tr>
+            <th> Job Name </th>
+            <th> Job Description </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${jobs.empty}">
+            <td colspan="2"> No Jobs Available </td>
+        </tr>
+        <tr th:each="job : ${jobs}">
+            <td><span th:text="${job.name}"></span></td>
+            <td><span th:text="${job.description}"></span></td>
+        </tr>
+    </tbody>
+</table>
+	
+</body>
+
