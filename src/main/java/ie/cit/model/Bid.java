@@ -28,7 +28,7 @@ public class Bid {
 	
 	@JsonProperty("Job")
 	@JsonManagedReference
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "job_id")
 	private Job job;
 	

@@ -1,5 +1,6 @@
 package ie.cit.model.form;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import ie.cit.model.Bid;
@@ -43,7 +44,7 @@ public class JobForm {
 	}
 
 	public Job getJob() {
-		return new Job(this.name, this.description, null, null, true);
+		return new Job(this.name, this.description, null, LocalDate.now(), null, true);
 	}
 	
 	

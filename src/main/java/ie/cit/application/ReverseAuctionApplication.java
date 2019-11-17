@@ -1,5 +1,7 @@
 package ie.cit.application;
 
+import java.time.LocalDate;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -53,9 +55,9 @@ public class ReverseAuctionApplication {
 		user1.setRole(admin, role);
 		user1 = userRepository.save(user1);
 		
-		Job job = new Job("123", "123", user, null, true);
-		job = jobRepository.save(job);
+		Job job = new Job("123", "123", user, LocalDate.now(), null, true);
 		Bid bid = new Bid(user1, job, 100.0f);
-		bid = bidRepository.save(bid);
+		job.addBid(bid);
+		job = jobRepository.save(job);
 	}
 }

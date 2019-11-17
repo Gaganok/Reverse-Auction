@@ -1,5 +1,6 @@
 package ie.cit.model;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,26 +35,31 @@ public class Job {
 	private User user;
 	
 	@JsonBackReference
-	@OneToMany(mappedBy = "job")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "job")
 	private Set<Bid> bids = new HashSet<Bid>();
 	
 	@JsonProperty("Current_Lowest_Bid")
+	@JsonBackReference
 	@OneToOne()
 	@JoinColumn(name = "bid_id", referencedColumnName = "id")
-	private Bid lowest_bid;
+	private Bid lowestBid;
 	
 	@Column(name = "active")
 	private boolean active;
 	
+	@Column(name = "date")
+	private LocalDate time;
+	
 	public Job() {}
 	
-	public Job(String name, String description, User user, Bid lowest_bid, boolean active) {
+	public Job(String name, String description, User user, LocalDate time, Bid lowestBid, boolean active) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.user = user;
-		this.lowest_bid = lowest_bid;
+		this.lowestBid = lowestBid;
 		this.active = active;
+		this.time = time;
 	}
 
 	public long getId() {
@@ -104,14 +110,26 @@ public class Job {
 		this.active = active;
 	}
 
-	public Bid getLowest_bid() {
-		return lowest_bid;
+	public Bid getLowestBid() {
+		return lowestBid;
 	}
 
-	public void setLowest_bid(Bid lowest_bid) {
-		this.lowest_bid = lowest_bid;
+	public void setLowestBid(Bid lowestBid) {
+		this.lowestBid = lowestBid;
 	}
 
+	public LocalDate getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDate time) {
+		this.time = time;
+	}
+	
+	public void addBid(Bid bid) {
+		lowestBid = bid;
+		bids.add(bid);
+	}
 	
 }
 

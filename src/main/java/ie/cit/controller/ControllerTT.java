@@ -52,7 +52,7 @@ public class ControllerTT {
 	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String home(Model model, Authentication authentication) {
 		model.addAttribute("userName", authentication.getName().toString());
-		Set<Job> jobSet = jobService.findAllJob();
+		Set<Job> jobSet = jobService.getActiveJobs();
 		model.addAttribute("jobs", jobSet);
 		return "home";
 	}
