@@ -35,31 +35,27 @@ public class Job {
 	private User user;
 	
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "job")
+	@OneToMany(mappedBy = "job")
 	private Set<Bid> bids = new HashSet<Bid>();
 	
 	@JsonProperty("Current_Lowest_Bid")
 	@JsonBackReference
-	@OneToOne()
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bid_id", referencedColumnName = "id")
 	private Bid lowestBid;
 	
 	@Column(name = "active")
-	private boolean active;
+	private boolean active = true;
 	
 	@Column(name = "date")
-	private LocalDate time;
+	private LocalDate time = LocalDate.now();
 	
 	public Job() {}
 	
-	public Job(String name, String description, User user, LocalDate time, Bid lowestBid, boolean active) {
-		super();
+	public Job(String name, String description, User user) {
 		this.name = name;
 		this.description = description;
 		this.user = user;
-		this.lowestBid = lowestBid;
-		this.active = active;
-		this.time = time;
 	}
 
 	public long getId() {
@@ -130,6 +126,5 @@ public class Job {
 		lowestBid = bid;
 		bids.add(bid);
 	}
-	
 }
 

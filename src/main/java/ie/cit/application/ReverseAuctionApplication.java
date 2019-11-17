@@ -37,7 +37,6 @@ public class ReverseAuctionApplication {
 
 	@Autowired private UserRepository userRepository;
 	@Autowired private RoleRepository roleRepository;
-	@Autowired private BidRepository bidRepository;
 	@Autowired private JobRepository jobRepository;
 	
 	@PostConstruct
@@ -55,7 +54,7 @@ public class ReverseAuctionApplication {
 		user1.setRole(admin, role);
 		user1 = userRepository.save(user1);
 		
-		Job job = new Job("123", "123", user, LocalDate.now(), null, true);
+		Job job = new Job("123", "123", user);
 		Bid bid = new Bid(user1, job, 100.0f);
 		job.addBid(bid);
 		job = jobRepository.save(job);

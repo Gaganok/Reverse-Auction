@@ -53,3 +53,7 @@ tr:hover {
 #show{
 	display: block;
 }
+
+.field-error{
+	border-color: red;
+}

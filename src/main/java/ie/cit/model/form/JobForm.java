@@ -44,7 +44,7 @@ public class JobForm {
 	}
 
 	public Job getJob() {
-		return new Job(this.name, this.description, null, LocalDate.now(), null, true);
+		return new Job(this.name, this.description, null);
 	}
 	
 	

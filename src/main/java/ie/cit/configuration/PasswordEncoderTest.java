@@ -11,7 +11,6 @@ public class PasswordEncoderTest implements PasswordEncoder{
 
 	@Override
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
-		// TODO Auto-generated method stub
 		return rawPassword.equals(encodedPassword);
 	}
 

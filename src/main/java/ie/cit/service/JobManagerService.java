@@ -34,6 +34,10 @@ public class JobManagerService {
 		Optional<Job> opt = jobRepository.findById(jobId);
 		if(opt.isPresent()){
 			Job job = opt.get();
+			
+			if(job.getLowestBid().getValue() <= bidValue)
+				throw new Exception("User Bid is bigger or equal to the lowest bid for the Job: " + jobId);
+			
 			Bid bid = new Bid(user, job, bidValue);
 			job.addBid(bid);
 			jobRepository.save(job);			
@@ -49,6 +53,7 @@ public class JobManagerService {
 		throw new Exception("Can't find Job with id: " + jobId);
 	}
 
+	//Rewrite
 	public Set<Job> getActiveJobs() {
 		Set<Job> jobs = findAllJob();
 		return jobs.stream()
@@ -57,10 +62,9 @@ public class JobManagerService {
 	}
 
 	public void updateJobActivity(long days) {
-		LocalDate now = LocalDate.now();
-		jobRepository.findAll().forEach(job -> {
-
-			if(ChronoUnit.DAYS.between(job.getTime(), now) >= days) {
+		LocalDate now = LocalDate.now().plusDays(1);
+		getActiveJobs().forEach(job -> {
+			if(ChronoUnit.DAYS.between(job.getTime(), now) >= 1) {
 				job.setActive(false);
 				jobRepository.save(job);
 			}

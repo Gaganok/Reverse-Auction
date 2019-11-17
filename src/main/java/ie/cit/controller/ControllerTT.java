@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,10 +76,10 @@ public class ControllerTT {
 	}
 	
 	@RequestMapping(value = "/bid", method = RequestMethod.POST)
-	public String bid(@RequestParam int jobId, @RequestParam int bidValue, Authentication auth) throws Exception {
+	public String bid(@RequestParam long jobId, @RequestParam int bidValue, Authentication auth) throws Exception {
 		User user = userService.findUserByUserName(auth.getName().toString());
-		//jobService.updateBid(jobId, bidValue, user);
-		return "/home";
+		jobService.updateBid(jobId, bidValue, user);
+		return "redirect:/home";
 	}
 	
 	@RequestMapping(value = "/jobdetails", method = RequestMethod.POST)

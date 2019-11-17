@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProc
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class JobSchedulerService {
 	@Autowired private ScheduledAnnotationBeanPostProcessor schedulePostProcessor;
 	@Autowired private JobTask task;
@@ -34,7 +34,7 @@ public class JobSchedulerService {
 		@Autowired private JobManagerService jobService;
 		@Value("${scheduler.days}") private long days;
 		
-		@Scheduled(fixedDelayString = "${scheduler.schedule}")
+		@Scheduled(fixedDelayString = "${scheduler.schedule}", initialDelay = 25000)
 		@Retryable( 
 				value = {UnknownHostException.class, Exception.class, UnmarshalException.class, Throwable.class}, 
 				maxAttempts = 3, 

@@ -25,6 +25,7 @@
 				<th>ID</th>
 				<th>Job Name</th>
 				<th>Description</th>
+				<th>Lowest Bid</th>
 			</tr>
 
 			<tr  th:if="${jobs.isEmpty()}">
@@ -34,12 +35,16 @@
 				<td><span th:text="${job.id}"></span></td>
 				<td><span th:text="${job.name}"></span></td>
 				<td><span th:text="${job.description}"></span></td>
+				<td><span th:text="${job.lowestBid.value}"></span></td>
 			</tr>
 
 			<tr id="hide">
-				<td><label>Bid: <input id="bid" type="text" name="bid" /></label>
+				<td>
+					<label>Bid: <input id="bid" type="text" name="bid" /></label>
 				</td>
-				<td><input id="bid_submit" type="button" value="Submit Bid"></input></td>
+				<td>
+					<input id="bid_submit" type="button" value="Submit Bid"></input>
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -47,23 +52,30 @@
 
 
 	<script type="text/javascript">
-		$("tr").click(function() {
-			/* $.redirect("/jobdetails", {
-				jobId : $(this).find("td:eq(0)").text()
-			}); */
+		
+		$("#bid_submit").click(function(){
+			$.post("/bid", 
+					{jobId: $(".active_tr").find("td:eq(0)").text(),
+					 bidValue: $("#bid").val()},
+					 function(){
+						 alert("success");
+						 location.reload();
+					 }
+			).fail(function(){
+				alert("Incorrect Bid Value")
+			})
+			
+		})
+		
+		$(".item").click(function() {
 			$.redirectPost("/jobdetails", {jobId: $(this).find("td:eq(0)").text()});
-			console.log("Clicked");
 		});
 		
 		$(".item").mouseenter(function() {
+			$("#hide").hide(200);
 			$(this).addClass("active_tr");
 			$(this).after($("#hide"));
 			$("#hide").show(200);
-		});
-		
-		$(".item").mouseleave(function() {
-			$("#hide").hide(200);
-			$(".active_tr").removeClass("active_tr");
 		});
 		
 		$.extend({
