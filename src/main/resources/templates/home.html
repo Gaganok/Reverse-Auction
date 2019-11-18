@@ -2,12 +2,14 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+
+<div th:insert="fragments.html :: head"></div>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="../static/css/style.css" th:href="@{/css/style.css}"
 	rel="stylesheet" />
-</head>
+
+
 <body>
 	<div class="main_menu">
 		<h2>
@@ -90,5 +92,5 @@
 		    }
 		});
 	</script>
-
+	<footer th:insert="fragments.html :: footer"></footer>
 </body>
