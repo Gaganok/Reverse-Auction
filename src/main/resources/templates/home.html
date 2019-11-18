@@ -18,9 +18,17 @@
 			<li><a href="/job">Create Job</a></li>
 		</ul>
 	</div>
-
-	<table>
+	
+	<label class="switch">
+	  <input type="checkbox" checked>
+	  <span class="slider"></span>
+	</label>
+	
+	<table id="active_table">
 		<tbody>
+			<tr>
+				<th><h1>ACTIVE</h1></th>
+			</tr>
 			<tr>
 				<th>ID</th>
 				<th>Job Name</th>
@@ -28,10 +36,10 @@
 				<th>Lowest Bid</th>
 			</tr>
 
-			<tr  th:if="${jobs.isEmpty()}">
+			<tr  th:if="${activeJobs.isEmpty()}">
 				<td colspan="2">No Jobs Available</td>
 			</tr>
-			<tr class= "item" th:each="job : ${jobs}">
+			<tr class= "item" th:each="job : ${activeJobs}">
 				<td><span th:text="${job.id}"></span></td>
 				<td><span th:text="${job.name}"></span></td>
 				<td><span th:text="${job.description}"></span></td>
@@ -48,11 +56,37 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<table id="inactive_table">
+		<tbody>
+			<tr>
+				<th><h1>INACTIVE</h1></th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Job Name</th>
+				<th>Description</th>
+				<th>Lowest Bid</th>
+			</tr>
+
+			<tr  th:if="${inactiveJobs.isEmpty()}">
+				<td colspan="2">No Jobs Available</td>
+			</tr>
+			<tr class= "inactive_item" th:each="job : ${inactiveJobs}">
+				<td><span th:text="${job.id}"></span></td>
+				<td><span th:text="${job.name}"></span></td>
+				<td><span th:text="${job.description}"></span></td>
+				<td><span th:text="${job.lowestBid}? ${job.lowestBid.value} : 'No Bids'"></span></td>
+			</tr>
+		</tbody>
+	</table>
 
 
 
 	<script type="text/javascript">
 		
+		$("#inactive_table").hide();
+	
 		$("#bid_submit").click(function(){
 			$.post("/bid", 
 					{jobId: $(".active_tr").find("td:eq(0)").text(),
@@ -71,6 +105,10 @@
 			$.redirectPost("/jobdetails", {jobId: $(this).find("td:eq(0)").text()});
 		});
 		
+		$(".inactive_item").click(function() {
+			$.redirectPost("/jobdetails", {jobId: $(this).find("td:eq(0)").text()});
+		});
+		
 		$(".item").mouseenter(function() {
 			$("#hide").hide();
 			$(".active_tr").removeClass("active_tr");
@@ -79,6 +117,18 @@
 			$(this).after($("#hide"));
 			$("#hide").show();
 		});
+		
+		
+		$(".slider").click(function(){
+			if($("#active_table").is(":visible")){
+				$("#active_table").hide();
+				$("#inactive_table").show();
+			} else {
+				$("#active_table").show();
+				$("#inactive_table").hide();
+			}
+		})
+		
 		
 		$.extend({
 			redirectPost: function(location, args){

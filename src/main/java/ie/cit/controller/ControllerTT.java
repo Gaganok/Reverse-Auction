@@ -55,7 +55,9 @@ public class ControllerTT {
 	public String home(Model model, Authentication authentication) {
 		model.addAttribute("userName", authentication.getName().toString());
 		Set<Job> jobSet = jobService.getActiveJobs();
-		model.addAttribute("jobs", jobSet);
+		Set<Job> inactJobSet = jobService.getInactiveJobs();
+		model.addAttribute("activeJobs", jobSet);
+		model.addAttribute("inactiveJobs", inactJobSet);
 		return "home";
 	}
 	

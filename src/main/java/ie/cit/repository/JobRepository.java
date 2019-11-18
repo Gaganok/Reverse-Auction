@@ -9,5 +9,6 @@ import ie.cit.model.Job;
 
 @Repository
 public interface JobRepository extends CrudRepository<Job, Long> {
-	Set<Job> findAllPleaseByDescription(String description);
+	Set<Job> findAllByDescription(String description);
+	Set<Job> findAllByActive(boolean active);
 }

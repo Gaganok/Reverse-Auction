@@ -58,5 +58,11 @@ public class ReverseAuctionApplication {
 		Bid bid = new Bid(user1, job, 100.0f);
 		job.addBid(bid);
 		job = jobRepository.save(job);
+		
+		Job job1 = new Job("Rabota", "Opesanie", user);
+		Bid bid1 = new Bid(user1, job1, 100.0f);
+		job1.setActive(false);
+		job1.addBid(bid1);
+		job1 = jobRepository.save(job1);
 	}
 }

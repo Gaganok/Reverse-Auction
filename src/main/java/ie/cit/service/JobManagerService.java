@@ -43,7 +43,6 @@ public class JobManagerService {
 			jobRepository.save(job);			
 		} else
 			throw new Exception("Can't find Job with Id: " + jobId);
-
 	}
 
 	public Job findById(Long jobId) throws Exception {
@@ -55,12 +54,17 @@ public class JobManagerService {
 
 	//Rewrite
 	public Set<Job> getActiveJobs() {
-		Set<Job> jobs = findAllJob();
+		return jobRepository.findAllByActive(true);
+		/*Set<Job> jobs = findAllJob();
 		return jobs.stream()
 				.filter(job -> job.isActive())
-				.collect(Collectors.toSet());
+				.collect(Collectors.toSet());*/
 	}
-
+	
+	public Set<Job> getInactiveJobs(){
+		return jobRepository.findAllByActive(false);
+	}
+	
 	public void updateJobActivity(long days) {
 		LocalDate now = LocalDate.now();
 		getActiveJobs().forEach(job -> {
