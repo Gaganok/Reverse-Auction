@@ -26,6 +26,7 @@ table {
   border-collapse: collapse;
   width: 50%;
   margin: 50px;
+  table-layout: fixed;
 }
 
 th, td {
@@ -43,7 +44,7 @@ tr:hover {
 }
 
 .active_tr {
-  background-color: #4CAF50;
+   /*background-color: #4CAF50;*/
 }
 
 #hide{

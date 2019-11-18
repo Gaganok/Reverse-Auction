@@ -35,7 +35,7 @@ public class JobManagerService {
 		if(opt.isPresent()){
 			Job job = opt.get();
 			
-			if(job.getLowestBid().getValue() <= bidValue)
+			if(job.getLowestBid() != null && job.getLowestBid().getValue() <= bidValue)
 				throw new Exception("User Bid is bigger or equal to the lowest bid for the Job: " + jobId);
 			
 			Bid bid = new Bid(user, job, bidValue);
@@ -62,9 +62,9 @@ public class JobManagerService {
 	}
 
 	public void updateJobActivity(long days) {
-		LocalDate now = LocalDate.now().plusDays(1);
+		LocalDate now = LocalDate.now();
 		getActiveJobs().forEach(job -> {
-			if(ChronoUnit.DAYS.between(job.getTime(), now) >= 1) {
+			if(ChronoUnit.DAYS.between(job.getTime(), now) >= days) {
 				job.setActive(false);
 				jobRepository.save(job);
 			}

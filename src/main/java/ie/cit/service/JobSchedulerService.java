@@ -36,7 +36,7 @@ public class JobSchedulerService {
 		
 		@Scheduled(fixedDelayString = "${scheduler.schedule}", initialDelay = 25000)
 		@Retryable( 
-				value = {UnknownHostException.class, Exception.class, UnmarshalException.class, Throwable.class}, 
+				value = {Exception.class}, 
 				maxAttempts = 3, 
 				backoff	= @Backoff(delayExpression = "#{${scheduler.retry:5000}}"))
 		public void task() throws Throwable{
