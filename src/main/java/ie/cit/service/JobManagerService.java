@@ -34,8 +34,7 @@ public class JobManagerService {
 		Optional<Job> opt = jobRepository.findById(jobId);
 		if(opt.isPresent()){
 			Job job = opt.get();
-			
-			if(job.getLowestBid() != null && job.getLowestBid().getValue() <= bidValue)
+			if(job.getLowestBid() != null && job.getLowestBid().getValue() <= bidValue || bidValue <=0) 
 				throw new Exception("User Bid is bigger or equal to the lowest bid for the Job: " + jobId);
 			
 			Bid bid = new Bid(user, job, bidValue);
