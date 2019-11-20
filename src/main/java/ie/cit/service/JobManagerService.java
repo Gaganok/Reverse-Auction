@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,7 @@ public class JobManagerService {
 	}
 
 	public Set<Job> findAllJob(){
-		Set<Job> jobSet = new HashSet<Job>();
-		jobRepository.findAll().forEach(jobSet::add);
-		return  jobSet;
+		return new HashSet<Job>(jobRepository.findAll());
 	}
 
 	public void updateBid(Long jobId, int bidValue, User user) throws Exception {
@@ -52,13 +49,8 @@ public class JobManagerService {
 		throw new Exception("Can't find Job with id: " + jobId);
 	}
 
-	//Rewrite
 	public Set<Job> getActiveJobs() {
 		return jobRepository.findAllByActive(true);
-		/*Set<Job> jobs = findAllJob();
-		return jobs.stream()
-				.filter(job -> job.isActive())
-				.collect(Collectors.toSet());*/
 	}
 	
 	public Set<Job> getInactiveJobs(){

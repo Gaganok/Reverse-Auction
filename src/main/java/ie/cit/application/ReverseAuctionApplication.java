@@ -42,13 +42,13 @@ public class ReverseAuctionApplication {
 	@PostConstruct
 	@Transactional
 	public void test() {
-		User user = new User("ole", "123");
+		User user = new User("ole", "123", "oleh", "bai", "88888");
 		Role role = new Role("USER");
 		role = roleRepository.save(role);
 		user.setRole(role);
 		user = userRepository.save(user);
 		
-		User user1 = new User("admin", "123");
+		User user1 = new User("admin", "123", "name", "surname", "004343");
 		Role admin = new Role("ADMIN");
 		role = roleRepository.save(admin);
 		user1.setRole(admin, role);

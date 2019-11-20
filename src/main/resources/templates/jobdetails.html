@@ -31,27 +31,48 @@
 	            <td><span th:text="${job.description}"></span></td>
 	        </tr>
 	        <tr>
-				<th>User ID</th>
-				<th>User Email</th>
+				<th>Posted By</th>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Phone</th>
+				<th>Email</th>
 			</tr>
 			<tr>
 				<td><span th:text="${job.user.id}"></span></td>
+				<td><span th:text="${job.user.name}"></span></td>
+				<td><span th:text="${job.user.surname}"></span></td>
+				<td><span th:text="${job.user.phone}"></span></td>
 	            <td><span th:text="${job.user.email}"></span></td>
 			</tr>
 			
 			<tr>
 				<th>Bid ID</th>
 				<th>Bid Value</th>
-				<th>User ID</th>
+				<th>User Name</th>
+				<th>User Surname</th>
 				<th>User Email</th>
 			</tr>
 			<tr th:each="bid : ${job.bids}">
 	        	<td><span th:text="${bid.id}"></span></td>
 	            <td><span th:text="${bid.value}"></span></td>
-	            <td><span th:text="${bid.user.id}"></span></td>
+	            <td><span th:text="${bid.user.name}"></span></td>
+	            <td><span th:text="${bid.user.surname}"></span></td>
 	            <td><span th:text="${bid.user.email}"></span></td>
 	        </tr>
-
+			
+			<tr>
+				<th>Lowest Bid</th>
+			</tr>
+			<tr>
+				<td><span th:text="${job.lowestBid.value}"></span></td>
+	            <th> By </th>
+	            <td><span th:text="${job.lowestBid.user.name}"></span></td>
+	            <td><span th:text="${job.lowestBid.user.surname}"></span></td>
+	            <td><span th:text="${job.lowestBid.user.email}"></span></td>
+			</tr>
 	    </tbody>
 	</table>
 

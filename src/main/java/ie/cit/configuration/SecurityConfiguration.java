@@ -40,20 +40,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.formLogin()
 			.loginPage("/login")
 			.permitAll()
+			.and()
+			.logout()
+			.logoutSuccessUrl("/login")
+			.permitAll()
 		.and().headers().frameOptions().disable()
 		.and()
 		.authorizeRequests().antMatchers("/**").hasAnyRole("USER", "ADMIN")
 		.and()
-		.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN");
-		
-		//.and()
-		//.authorizeRequests().antMatchers("/h2-console/**").permitAll();
-
-		//.and().formLogin().loginPage("/login").permitAll();
-
-		/*.and()
- 	.formLogin()
- 	.loginPage("/login").permitAll(); */
+		.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN")
+		.and()
+		.authorizeRequests().antMatchers("/h2-console/**").hasRole("ADMIN");
 	}
 
 }

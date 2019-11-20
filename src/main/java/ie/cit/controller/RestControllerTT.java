@@ -1,10 +1,8 @@
 package ie.cit.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ie.cit.model.Bid;
+import ie.cit.model.Job;
 import ie.cit.model.User;
 import ie.cit.repository.BidRepository;
 import ie.cit.repository.UserRepository;
+import ie.cit.service.JobManagerService;
 
 @RestController
 @RequestMapping("/api")
 public class RestControllerTT {
 	
+	@Autowired private JobManagerService jobService;
 	@Autowired private BidRepository bidRepository;
 	@Autowired private UserRepository userRepository;
 	
@@ -32,34 +32,17 @@ public class RestControllerTT {
 		return "test";
 	}
 	
-	@RequestMapping("/bids")
-	public List<Bid> getAllBids() throws JsonGenerationException, JsonMappingException, IOException {
-		List<Bid> list = new ArrayList<Bid>();
-		bidRepository.findAll().forEach(list::add);
-		return list;//parseJson(bidRepository.findAll());	
+	@RequestMapping("/jobs")
+	public Set<Job> getActiveJobs(){
+		return jobService.getActiveJobs();
 	}
 	
 	@RequestMapping("/bidsByUserId")
-	public String getBidsByUser(@RequestParam long userId) throws JsonGenerationException, JsonMappingException, IOException {
-		Optional opt = userRepository.findById(userId);
-		String result = "";
-		if(opt.isPresent()) {
-			User user = (User) opt.get();
-			return parseJson(bidRepository.findAllByUser(user));
-		} else 
-			return "No Such user!!";
-	}
-	
-	//Move Somewhere
-	private String parseJson(Iterable<Bid> bidsItr) throws JsonGenerationException, JsonMappingException, IOException {	
-		List<Bid> bids = new ArrayList<Bid>();
-	    bidsItr.forEach(bids::add);
-	    
-	    final ByteArrayOutputStream out = new ByteArrayOutputStream();
-	    final ObjectMapper mapper = new ObjectMapper();
-	    
-	    mapper.writeValue(out, bids);
-	    
-	    return new String(out.toByteArray());
+	public Set<Bid> getBidsByUser(@RequestParam long userId) throws Exception{
+		Optional<User> opt = userRepository.findById(userId);
+		
+		if(opt.isPresent())
+			return bidRepository.findAllByUser(opt.get());
+		throw new Exception("No user with id: " + userId);
 	}
 }

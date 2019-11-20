@@ -18,40 +18,40 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Job {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@JsonProperty("Job_User")
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "job")
 	private Set<Bid> bids = new HashSet<Bid>();
-	
+
 	@JsonProperty("Current_Lowest_Bid")
 	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bid_id", referencedColumnName = "id")
 	private Bid lowestBid;
-	
+
 	@Column(name = "active")
 	private boolean active = true;
-	
+
 	@Column(name = "date")
 	private LocalDate time = LocalDate.now();
-	
+
 	public Job() {}
-	
+
 	public Job(String name, String description, User user) {
 		this.name = name;
 		this.description = description;
@@ -121,7 +121,7 @@ public class Job {
 	public void setTime(LocalDate time) {
 		this.time = time;
 	}
-	
+
 	public void addBid(Bid bid) {
 		lowestBid = bid;
 		bids.add(bid);

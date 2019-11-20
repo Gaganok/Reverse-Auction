@@ -26,6 +26,15 @@ public class User {
 
 	@Column(name = "email", unique = true)
 	private String email;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "surname")
+	private String surname;	
+
+	@Column(name = "phone")
+	private String phone;
 
 	@JsonIgnore
 	@Column(name = "password")
@@ -48,10 +57,20 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public User(String email, String password, String name, String surname, String phone) {
+		this(email, password);
+		this.name = name;
+		this.surname = surname;
+		this.phone = phone;
+	}
 
 	public User(UserForm userForm) {
 		this.email = userForm.getEmail();
 		this.password = userForm.getPassword();
+		this.name = userForm.getName();
+		this.surname = userForm.getSurname();
+		this.phone = userForm.getPhone();
 	}
 
 	public String getEmail() {
@@ -95,5 +114,29 @@ public class User {
 	
 	public Collection<Role> getRoles(){
 		return roles;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phoneNumber) {
+		this.phone = phoneNumber;
 	}
 }	

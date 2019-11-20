@@ -17,6 +17,15 @@
 					<div class='welcome'>Register</div>
 					<div class='subtitle'>We're almost done. Before using our services, fill in this form to create an account.</div>
 					<div class='input-fields'>
+						<label for="name"><b>Email</b></label> 
+						<input type="text" placeholder="Name" class='input-line full-width' name="name" th:field="*{name}" required> 
+						
+						<label for="surname"><b>Email</b></label> 
+						<input type="text" placeholder="Surname" class='input-line full-width' name="surname" th:field="*{surname}" required> 
+						
+						<label for="phone"><b>Email</b></label> 
+						<input type="text" placeholder="Phone Number" class='input-line full-width' name="phone" th:field="*{phone}" required> 
+						
 						<label for="email"><b>Email</b></label> 
 						<input type="text" placeholder="Enter Email" class='input-line full-width' name="email" th:field="*{email}" required> 
 						
