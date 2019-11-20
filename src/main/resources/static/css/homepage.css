@@ -101,6 +101,8 @@ button:focus {
 
 .input-fields {
   margin-top: 25px;
+  width: 600px;
+  padding-left: 35%;
 }
 
 .container {
@@ -173,8 +175,7 @@ button:focus {
   box-sizing: border-box;
   height: 560px;
   width: 360px;
-  background: #fff;
-  background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') top left no-repeat;
+  background: black;
 }
 
 .overlay {
@@ -202,7 +203,11 @@ button:focus {
   background-size:cover;
 }
 
-@media (max-width: 500px) {
+.signin {
+  text-align: center;
+}
+
+@media {
   .window {
     width: 100%;
     height: 100%;
