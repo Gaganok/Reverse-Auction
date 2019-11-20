@@ -33,8 +33,10 @@ public class RestControllerTT {
 	}
 	
 	@RequestMapping("/bids")
-	public String getAllBids() throws JsonGenerationException, JsonMappingException, IOException {
-		return parseJson(bidRepository.findAll());	
+	public List<Bid> getAllBids() throws JsonGenerationException, JsonMappingException, IOException {
+		List<Bid> list = new ArrayList<Bid>();
+		bidRepository.findAll().forEach(list::add);
+		return list;//parseJson(bidRepository.findAll());	
 	}
 	
 	@RequestMapping("/bidsByUserId")
