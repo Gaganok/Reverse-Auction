@@ -36,7 +36,8 @@ public class JobManagerService {
 			Job job = opt.get();
 			if(job.getLowestBid() != null && job.getLowestBid().getValue() <= bidValue || bidValue <=0) 
 				throw new Exception("User Bid is bigger or equal to the lowest bid for the Job: " + jobId);
-			
+			if(job.getUser().getEmail().equals(user.getEmail()))
+				throw new Exception("User can't bid on his own job!");
 			Bid bid = new Bid(user, job, bidValue);
 			job.addBid(bid);
 			jobRepository.save(job);			
