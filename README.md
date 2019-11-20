@@ -5,4 +5,4 @@ This application is designed to work as a reverse auction site to fulfill requir
 Users can add a job which they need to be done, and people can bid on these jobs. Lowest bid wins. :zap: 
 
 ### This application achieved XX% 
-Completed by [Oleh Kepsha](www.github.com/Gaganok) and [Danielle Daly](www.github.com/danielle253)
+Completed by [Oleh Kepsha](https://www.github.com/Gaganok) and [Danielle Daly](www.github.com/danielle253)
