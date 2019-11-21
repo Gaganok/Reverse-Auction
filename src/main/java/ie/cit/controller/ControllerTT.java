@@ -32,17 +32,12 @@ public class ControllerTT {
 	@Autowired private JobManagerService jobService;
 	@Autowired private UserService userService;
 	
-	@RequestMapping(value="/")
-	public String index() {
-		return "index";
-	}
-	
 	@RequestMapping(value="/login")
 	public String login(Model model) {	
 		return "login";
 	}	
 	
-	@RequestMapping(value="/home")
+	@RequestMapping(value="/")
 	public ModelAndView forwardHome() {
 		return new ModelAndView("forward:/home");
 	}
