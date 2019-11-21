@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="../static/css/homepage.css" th:href="@{/css/homepage.css}"
+	rel="stylesheet" />
+</head>
 <body>
-	<h1>Welcome to the login</h1>
-	<div class="login-page">
-		<div class="form">
-			<div class="error" th:if="${param.error}">Invalid user name and password.</div>
-			<div class="error" th:if="${param.logout}">You have been logged out.</div>
-			<form class="login-form" method="post" th:action="@{/login}">
-				<label>User name: <input type="text" name="username"/></label>
-				<label>Password: <input type="password" name="password"/>
-				</label><input type="submit" value="Sign In"/>
-			</form>
-		</div>
-	</div>
-</body>
+	<form class="login-form" method="post" th:action="@{/login}">
 
+			<div class='container'>
+				<div class='window'>
+					<div class='overlay'></div>
+					<div class='content'>
+						<div class='welcome'>Login</div>
+						<div class='subtitle'>Please enter your details</div>
+						<div class='input-fields'>
+							<div class="error" th:if="${param.error}">Invalid user name
+								or password.</div>
+							<div class="error" th:if="${param.logout}">You have been
+								logged out.</div>
+							<label>User name: <input type="text" class='input-line full-width' name="username" /></label> 
+							<label>Password: <input type="password" class='input-line full-width' name="password" /></label>
+							<input class='ghost-round full-width' type="submit" value="Sign In" />
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+</body>
