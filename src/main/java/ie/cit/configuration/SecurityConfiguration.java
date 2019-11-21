@@ -45,12 +45,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.logoutSuccessUrl("/login")
 			.permitAll()
 		.and().headers().frameOptions().disable()
-		.and()
+		/*.and()
 		.authorizeRequests().antMatchers("/**").hasAnyRole("USER", "ADMIN")
-		.and()
+		*/.and()
 		.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN")
 		.and()
-		.authorizeRequests().antMatchers("/h2-console/**").hasRole("ADMIN");
+		.authorizeRequests().antMatchers("/h2-console/**").hasRole("ADMIN")
+		.and()
+		.authorizeRequests().antMatchers("/css/**").permitAll()
+		.and()
+		.authorizeRequests().antMatchers("/index").permitAll();
 	}
 
 }
