@@ -1,34 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-	<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
-		<link rel="stylesheet" th:href="@{/css/flag-icon.css}" type="text/css" />
-	<title>Reverse Auction</title>
-	<link rel="shortcut icon" th:href="@{/favicon_io/favicon.ico}">
-	<meta charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}" type="text/css" />
+<link rel="stylesheet" th:href="@{/css/flag-icon.css}" type="text/css" />
+<title>Reverse Auction</title>
+<meta charset="utf-8" />
 </head>
 <body>
-    <div th:fragment="menu">
+	<div th:fragment="menu">
 		<nav>
-		  <a th:href="@{/}"><span th:text="#{navigation.home}">BLAH</span></a>
-          <a th:href="@{/job}">Create Job<span "></span></a><!-- th:text="#{navigation.counties} -->
-          <!-- <a th:href="@{/showtowns}"><span th:text="#{navigation.towns}">BLAH</span></a>
+			<a th:href="@{/}"><span th:text="#{navigation.home}">BLAH</span></a>
+			<a th:href="@{/job}">Create Job<span"></span></a>
+			<!-- th:text="#{navigation.counties} -->
+			<!-- <a th:href="@{/showtowns}"><span th:text="#{navigation.towns}">BLAH</span></a>
           <a th:href="@{/newcounty}"><span th:text="#{navigation.newcounty}">BLAH</span></a>
           <a th:href="@{/newtown}"><span th:text="#{navigation.newtown}">BLAH</span></a> -->
-        </nav>
-    </div>
+		</nav>
+	</div>
 
-    <div th:fragment="footer">
-    	<h4>Header</h4>
-<!-- <span th:with="currentUrl=(${@currentUrlWithoutParam.apply('lang')})">
+	<div th:fragment="footer">
+		<h4>Header</h4>
+		<!-- <span th:with="currentUrl=(${@currentUrlWithoutParam.apply('lang')})">
     		<a th:href="@{${currentUrl}(lang=fr)}"><i class="flag-icon flag-icon-fr"></i></a>
 		</span>
 		<!--  adapted from https://stackoverflow.com/questions/27623405/thymeleaf-add-parameter-to-current-url -->
 		<!-- <span th:with="currentUrl=(${@currentUrlWithoutParam.apply('lang')})">
-    		<a th:href="@{${currentUrl}(lang=ie)}"><i class="flag-icon flag-icon-ie"></i></a>
-		</span> -->		
- 	</div> 
-	
-    
+			<a th:href="@{${currentUrl}(lang=ua)}"><i class="flag-icon flag-icon-ua"></i></a> 
+		</span>-->
+	</div>
+
+
 </body>
 </html>

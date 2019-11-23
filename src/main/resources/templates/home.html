@@ -13,15 +13,15 @@
 <body>
 	<div class="main_menu">
 		<h2>
-			<span th:remove="tag">Welcome </span> <span th:text="${userName}">name</span>
+			<span th:remove="tag" th:text="#{index.welcome}">Welcome </span> <span th:text="${userName}">name</span>
 		</h2>
 		<ul>
-			<li><a class="active" href="/home">Home</a></li>
+			<li><a class="active" th:text="#{menu.alljobs}" href="/home">All Jobs</a></li>
 			<li><a href="/job">Create Job</a></li>
 		</ul>
 	</div>
 	
-	<p>Use the toggle to switch between active & inactive jobs!</p>  
+	<p th:text="#{index.toggle}">Use the toggle to switch between active & inactive jobs!</p>  
 	<label class="switch">
 	  <input type="checkbox" checked>
 	  <span class="slider round"></span>
@@ -143,5 +143,8 @@
 		    }
 		});
 	</script>
-	<footer th:insert="fragments.html :: footer"></footer>
+	<footer>
+	<a th:href="@{home?lang=ua}"><i class="flag-icon flag-icon-ua"></i></a>
+	<a th:href="@{home?lang=ie}"><i class="flag-icon flag-icon-ie"></i></a>
+</footer>
 </body>

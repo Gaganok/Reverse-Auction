@@ -12,7 +12,7 @@
 					<div class='overlay'></div>
 					<div class='content'>
 						<div class='welcome'>Login</div>
-						<div class='subtitle'>Please enter your details</div>
+						<div class='subtitle' th:text=#{login.subtitle}>Please enter your details</div>
 						<div class='input-fields'>
 							<div class="error" th:if="${param.error}">Invalid user name
 								or password.</div>
