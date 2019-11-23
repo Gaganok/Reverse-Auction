@@ -1,3 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500);
+
+*{
+	font-family: Roboto;
+	font-weight: 300;
+}
 div.main_menu ul{
   list-style-type: none;
   margin: 0;
@@ -29,6 +35,9 @@ table {
   table-layout: fixed;
 }
 
+th {
+	font-weight: 600;
+}
 th, td {
   padding: 8px;
   text-align: left;
@@ -71,6 +80,14 @@ tr:hover {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 .slider {

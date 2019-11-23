@@ -13,7 +13,7 @@
 <body>
 	<div class="main_menu">
 		<h2>
-			<span th:remove="tag">Welcome </span> <small th:text="${userName}">name</small>
+			<span th:remove="tag">Welcome </span> <span th:text="${userName}">name</span>
 		</h2>
 		<ul>
 			<li><a class="active" href="/home">Home</a></li>
@@ -21,15 +21,16 @@
 		</ul>
 	</div>
 	
+	<p>Use the toggle to switch between active & inactive jobs!</p>  
 	<label class="switch">
 	  <input type="checkbox" checked>
-	  <span class="slider"></span>
+	  <span class="slider round"></span>
 	</label>
 	
 	<table id="active_table">
 		<tbody>
 			<tr>
-				<th><h1>ACTIVE</h1></th>
+				<th><h1>Active Jobs</h1></th>
 			</tr>
 			<tr>
 				<th>ID</th>
@@ -62,7 +63,7 @@
 	<table id="inactive_table">
 		<tbody>
 			<tr>
-				<th><h1>INACTIVE</h1></th>
+				<th><h1>Inactive Jobs</h1></th>
 			</tr>
 			<tr>
 				<th>ID</th>
