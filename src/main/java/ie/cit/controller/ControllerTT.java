@@ -32,17 +32,12 @@ public class ControllerTT {
 	@Autowired private JobManagerService jobService;
 	@Autowired private UserService userService;
 	
-	@RequestMapping(value="/")
-	public String index() {
-		return "index";
-	}
-	
-	@RequestMapping(value="/login")
+	@RequestMapping("/login")
 	public String login(Model model) {	
 		return "login";
 	}	
 	
-	@RequestMapping(value="/home")
+	@RequestMapping(value="/")
 	public ModelAndView forwardHome() {
 		return new ModelAndView("forward:/home");
 	}
@@ -100,14 +95,5 @@ public class ControllerTT {
 		model.addAttribute("job", job);
 		return "jobdetails";
 	}
-	
-	/*@GetMapping("/logout")
-	public String getLogoutPage(Authentication auth){
-	
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    if (authentication != null)
-	        new SecurityContextLogoutHandler().logout(request, response, authentication);
-	    
-	    return "redirect:/login";
-	}*/
+
 }
