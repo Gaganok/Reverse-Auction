@@ -4,53 +4,32 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-@JsonIgnoreProperties("job")
 public class Job {
 
-	@Id
-	@GeneratedValue
 	private long id;
-
-	@Column(name = "name")
 	private String name;
 
-	@Column(name = "description")
 	private String description;
 
 	@JsonProperty("jobUser")
-	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	
-	@OneToMany(mappedBy = "job")
+
 	@JsonProperty("bids")
 	@JsonIgnoreProperties("job")
 	private Set<Bid> bids = new HashSet<Bid>();
 
 	@JsonProperty("lowestBid")
 	@JsonIgnoreProperties("job")
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "bid_id", referencedColumnName = "id")
 	private Bid lowestBid;
 
-	@Column(name = "active")
 	private boolean active = true;
 
-	@Column(name = "date")
 	private LocalDate time = LocalDate.now();
 
 	public Job() {}
