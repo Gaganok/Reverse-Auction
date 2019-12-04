@@ -36,7 +36,8 @@ public class RestTemplateConfiguration {
 		
 		restTemplate.getMessageConverters()
         	.add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-	
+		
+		//Authentication
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();

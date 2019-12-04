@@ -38,7 +38,7 @@ public class RestControllerTT {
 		return jobService.getActiveJobs();
 	}
 	
-	@RequestMapping("/bidsByUserId")
+	@RequestMapping("/bids")
 	public Set<Bid> getBidsByUser(@RequestParam long userId) throws Exception{
 		Optional<User> opt = userRepository.findById(userId);
 		

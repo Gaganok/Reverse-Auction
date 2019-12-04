@@ -6,42 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import ie.cit.model.Bid;
 import ie.cit.model.Job;
 
-@Controller
-public class ControllerTT {
-
+@RestController
+@RequestMapping("/rest")
+public class RestControllerTT {
+	
 	@Autowired private RestTemplate restTemplate;
-
-	@GetMapping("/jobs")
-	public String jobs(Model model) {
+	
+	@GetMapping(value="/home")
+	public Set<Job> home() {
 		String url = "http://localhost:8080/api/jobs";
-
+		
 		ResponseEntity<Set<Job>> responseEntity = 
 				restTemplate.exchange(url, HttpMethod.GET, null, 
 						new ParameterizedTypeReference<Set<Job>>() {});
-		model.addAttribute("jobs", responseEntity.getBody());
-		
-		return "jobs";
+
+		return responseEntity.getBody();
 	}
 	
-	@RequestMapping("/bids")
-	public String bids(@RequestParam int userId, Model model) {
-		String url = "http://localhost:8080/api/bids?userId=" + userId ;
-
-		ResponseEntity<Set<Bid>> responseEntity = 
-				restTemplate.exchange(url, HttpMethod.GET, null, 
-						new ParameterizedTypeReference<Set<Bid>>() {});
-		model.addAttribute("bids", responseEntity.getBody());
+	@GetMapping(value="/bids")
+	public Set<Bid> bids(@RequestParam int userId) {
+		String url = "http://localhost:8080/api/bids";
 		
-		return "bids";
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
+		        .queryParam("userId", userId);
+		        
+		ResponseEntity<Set<Bid>> responseEntity = 
+				restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null, 
+						new ParameterizedTypeReference<Set<Bid>>() {});
+
+		return responseEntity.getBody();
 	}
 }
