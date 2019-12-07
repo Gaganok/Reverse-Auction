@@ -19,8 +19,6 @@ import ie.cit.repository.JobRepository;
 import ie.cit.repository.RoleRepository;
 import ie.cit.repository.UserRepository;
 
-
-
 @SpringBootApplication
 @ComponentScan(basePackages={"ie.cit.*"})
 @EnableJpaRepositories(basePackages="ie.cit.repository")
