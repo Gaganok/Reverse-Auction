@@ -13,6 +13,7 @@
 			<tr>
 				<th>ID</th>
 				<th>Value</th>
+				<th>Job Name</th>
 			</tr>
 
 			<tr  th:if="${bids.isEmpty()}">
@@ -21,6 +22,7 @@
 			<tr class= "item" th:each="bid : ${bids}">
 				<td><span th:text="${bid.id}"></span></td>
 				<td><span th:text="${bid.value}"></span></td>
+				<td><span th:text="${bid.job.name}"></span></td>
 			</tr>
 		</tbody>
 	</table>

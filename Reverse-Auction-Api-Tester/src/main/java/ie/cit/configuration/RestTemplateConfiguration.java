@@ -37,15 +37,16 @@ public class RestTemplateConfiguration {
 		restTemplate.getMessageConverters()
         	.add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 		
-		//Authentication
+	    return restTemplate;
+	}
+	
+	@Bean
+	public HttpEntity<MultiValueMap<String, String>> authenticationRequest(){
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
 		map.add("username", "admin");
 		map.add("password", "123");
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		ResponseEntity<String> str = restTemplate.postForEntity("http://localhost:8080/login", request, String.class);
-		
-	    return restTemplate;
+		return new HttpEntity<MultiValueMap<String, String>>(map, headers);
 	}
 }
