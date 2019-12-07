@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" />
+
+
+<body>	
+	<table>
+		<tbody>
+			<tr>
+				<th>ID</th>
+				<th>Job Name</th>
+				<th>Description</th>
+				<th>Lowest Bid</th>
+			</tr>
+
+			<tr  th:if="${jobs.isEmpty()}">
+				<td colspan="2">No Jobs Available</td>
+			</tr>
+			<tr class= "item" th:each="job : ${jobs}">
+				<td><span th:text="${job.id}"></span></td>
+				<td><span th:text="${job.name}"></span></td>
+				<td><span th:text="${job.description}"></span></td>
+				<td><span th:text="${job.lowestBid}? ${job.lowestBid.value} : 'No Bids'"></span></td>
+			</tr>
+		</tbody>
+	</table>
+</body>

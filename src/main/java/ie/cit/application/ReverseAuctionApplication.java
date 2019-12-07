@@ -1,7 +1,5 @@
 package ie.cit.application;
 
-import java.time.LocalDate;
-
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -17,7 +15,6 @@ import ie.cit.model.Bid;
 import ie.cit.model.Job;
 import ie.cit.model.Role;
 import ie.cit.model.User;
-import ie.cit.repository.BidRepository;
 import ie.cit.repository.JobRepository;
 import ie.cit.repository.RoleRepository;
 import ie.cit.repository.UserRepository;
