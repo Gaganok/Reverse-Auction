@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.permitAll()
 		.and().headers().frameOptions().disable()
 		.and()
-		.authorizeRequests().antMatchers("/registration").permitAll()
+		.authorizeRequests().antMatchers("/registration", "/login").permitAll()
 		.and()
 		.authorizeRequests().antMatchers("/**").hasAnyRole("USER", "ADMIN");
 		/*.and()
@@ -58,7 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) {
 		web
 		.ignoring()
-		.antMatchers("/css/**");
+		.antMatchers("/css/**", "/resources/**");
+		
 	}
 	
 }
