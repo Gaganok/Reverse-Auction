@@ -11,7 +11,7 @@
 				<div class='window'>
 					<div class='overlay'></div>
 					<div class='content'>
-						<div class='welcome' th:text="#{login}">Login</div>
+						<div class='welcome'><p th:text="#{login}">Login</p></div>
 						<div class='subtitle'>Please enter your details</div>
 						<div class='input-fields'>
 							<div class="error" th:if="${param.error}">Invalid user name
@@ -32,3 +32,8 @@
 			</div>
 	</form>
 </body>
+<footer>
+	<p th:text=#{language.change}>You can change the language here:</p>
+	<a th:text="#{language.russian}" th:href="@{login?lang=ru}">Russian<i class="flag-icon flag-icon-ua"></i></a>&nbsp;
+	<a th:text="#{language.english}" th:href="@{login?lang=ie}">English<i class="flag-icon flag-icon-ie"></i></a>
+</footer>

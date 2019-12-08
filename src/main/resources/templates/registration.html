@@ -19,11 +19,11 @@
 					
 					<div class='input-fields'>
 						
-						<label for="name" th:text=#{register.firstname}> 
+						<label for="name" th:text="#{register.firstname}"> 
 							<b>First Name</b>
 						</label> 
 						
-						<input type="text" placeholder="Name"
+						<input type="text" th:placeholder="#{register.firstname.placeholder}"
 							   class='input-line full-width' 
 							   name="name" th:field="*{name}" required> 
 						
@@ -31,7 +31,7 @@
 							<b>Surname</b>
 						</label> 
 						
-						<input type="text" placeholder="Surname" 
+						<input type="text" th:placeholder="#{register.surname.placeholder}"
 							   class='input-line full-width' 
 							   name="surname" th:field="*{surname}" required>
 						
@@ -39,7 +39,7 @@
 							<b>Phone Number</b>
 						</label> 
 						
-						<input type="text" placeholder="Phone Number" 
+						<input type="text" th:placeholder="#{register.phone.placeholder}" 
 							   class='input-line full-width'
 							   name="phone" th:field="*{phone}" required> 
 							   
@@ -47,7 +47,7 @@
 							<b>Email</b>
 						</label> 
 						
-						<input type="text" placeholder="Enter Email" 
+						<input type="text" th:placeholder="#{register.email.placeholder}" 
 							   class='input-line full-width'
 							   name="email" th:field="*{email}" required>
 					    
@@ -55,7 +55,7 @@
 					    	<b>Password</b>
 					    </label> 
 					    
-					    <input type="password" placeholder="Enter Password" 
+					    <input type="password" th:placeholder="#{register.password.placeholder}"
 					    	   class='input-line full-width' 
 					    	   name="psw" th:field="*{password}" required> 
 					    	   
@@ -63,20 +63,20 @@
 					    	<b>Confirm Password</b>
 					    </label> 
 					    
-					    <input type="password" placeholder="Repeat Password"
+					    <input type="password" th:placeholder="#{register.password.confirmPassword.placeholder}"
 							   class='input-line full-width' 
 							   name="psw-repeat" 
 							   th:field="*{matchingPassword}" required>
 	
-						<p th:text=#{register.agree}>By creating an account you agree to our 
-							<a href="#" th:text=#{register.terms}>Terms & Privacy</a>.
-						</p>
+						<p th:text=#{register.agree}>By creating an account you agree to our</p> 
+						<a href="#" th:text=#{register.terms}>Terms & Privacy</a>.
+						
 						
 						<button class='ghost-round full-width' type="submit" th:text=#{register}>Register</button>
 						
 						<div class="signin">
 							<p th:text=#{register.existingAccount}>
-								Already have an account? <a href="/login" th:text=#{register.signin}>Sign in</a>.
+								Already have an account?<p> <a href="/login" th:text=#{register.signin}>Sign in</a>.
 							</p>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 </body>
 <footer>
 	<p th:text=#{language.change}>You can change the language here:</p>
-	<a th:text="#{language.russian}" th:href="@{?lang=ru}">Russian<i class="flag-icon flag-icon-ua"></i></a>&nbsp;
-	<a th:text="#{language.english}" th:href="@{?lang=ie}">English<i class="flag-icon flag-icon-ie"></i></a>
+	<a th:text="#{language.russian}" th:href="@{?lang=ru}"><i>Russian</i></a>&nbsp;
+	<a th:text="#{language.english}" th:href="@{?lang=ie}"><i>English</i></a>
 </footer>
 </html>
