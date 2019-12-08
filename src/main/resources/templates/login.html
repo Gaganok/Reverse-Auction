@@ -11,24 +11,31 @@
 				<div class='window'>
 					<div class='overlay'></div>
 					<div class='content'>
-						<div class='welcome'>Login</div>
-						<div class='subtitle'>Please enter your details</div>
+						<div class='welcome'><p th:text="#{login}"></p></div>
+						<div class='subtitle'><p th:text="#{login.subtitle}">Please enter your details</p></div>
 						<div class='input-fields'>
-							<div class="error" th:if="${param.error}">Invalid user name
+							<div class="error" th:if="${param.error}" th:text="#{login.error}">Invalid user name
 								or password.</div>
-							<div class="error" th:if="${param.logout}">You have been
+							<div class="error" th:if="${param.logout}" th:text="#{login.logout}">You have been
 								logged out.</div>
-							<label>User name: <input type="text" class='input-line full-width' name="username" /></label> 
-							<label>Password: <input type="password" class='input-line full-width' name="password" /></label>
-							<input class='ghost-round full-width' type="submit" value="Sign In" />
+							<label th:text="#{login.username}">User name: </label>
+							<input type="text" class='input-line full-width' name="username" /> 
+							<label th:text="#{login.password}">Password: </label>
+							<input type="password" class='input-line full-width' name="password" />
+							<label><input class='ghost-round full-width' type="submit" th:value="#{login.submit}"/></label>
 						</div>
 						<div class="signin">
-							<p>
-								New here? <a href="/registration">Register for an account</a>.
-							</p>
+							<p th:text="#{login.new}">New here?</p> 
+							<a th:text="#{login.register}"href="/registration">Register for an account</a>.
+							
 						</div>
 					</div>
 				</div>
 			</div>
 	</form>
 </body>
+<footer>
+	<p th:text=#{language.change}>You can change the language here:</p>
+	<a th:text="#{language.russian}" th:href="@{login?lang=ru}">Russian<i class="flag-icon flag-icon-ua"></i></a>&nbsp;
+	<a th:text="#{language.english}" th:href="@{login?lang=ie}">English<i class="flag-icon flag-icon-ie"></i></a>
+</footer>

@@ -2,8 +2,6 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-
-<div th:insert="fragments.html :: head"></div>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="../static/css/style.css" th:href="@{/css/style.css}"
@@ -16,9 +14,8 @@
 			<span th:text="#{welcome}"> </span> <small th:text="${userName}">name</small>
 		</h2>
 		<ul>
-			<li><a class="active" href="/home" th:text="#{home.home}">Default
-					home</a></li>
-			<li><a href="/job">Create Job</a></li>
+			<li><a class="active" href="/home" th:text="#{home.home}">Home</a></li>
+			<li><a th:text="#{home.newJob}" href="/job">Create Job</a></li>
 		</ul>
 	</div>
 
@@ -29,17 +26,17 @@
 	<table id="active_table">
 		<tbody>
 			<tr>
-				<th><h1>ACTIVE</h1></th>
+				<th><h1 th:text="#{home.job.active}">ACTIVE</h1></th>
 			</tr>
 			<tr>
-				<th>ID</th>
-				<th>Job Name</th>
-				<th>Description</th>
-				<th>Lowest Bid</th>
+				<th th:text="#{home.job.id}">ID</th>
+				<th th:text="#{home.job.name}">Job Name</th>
+				<th th:text="#{home.job.description}">Description</th>
+				<th th:text="#{home.job.lowestBid}">Lowest Bid</th>
 			</tr>
 
 			<tr th:if="${activeJobs.isEmpty()}">
-				<td colspan="2">No Jobs Available</td>
+				<td colspan="2" th:text="#{home.job.none}">No Jobs Available</td>
 			</tr>
 			<tr class="item" th:each="job : ${activeJobs}">
 				<td><span th:text="${job.id}"></span></td>
@@ -52,7 +49,7 @@
 			<tr id="hide">
 				<td><label>Bid: <input id="bid" type="text" name="bid" /></label>
 				</td>
-				<td><input id="bid_submit" type="button" value="Submit Bid"></input>
+				<td><input id="bid_submit" type="button" th:value="#{job.submit}"></input>
 				</td>
 			</tr>
 		</tbody>
@@ -61,17 +58,17 @@
 	<table id="inactive_table">
 		<tbody>
 			<tr>
-				<th><h1>INACTIVE</h1></th>
+				<th><h1 th:text="#{home.job.inactive}">INACTIVE</h1></th>
 			</tr>
 			<tr>
-				<th>ID</th>
-				<th>Job Name</th>
-				<th>Description</th>
-				<th>Lowest Bid</th>
+				<th th:text="#{home.job.id}">ID</th>
+				<th th:text="#{home.job.name}">Job Name</th>
+				<th th:text="#{home.job.description}">Description</th>
+				<th th:text="#{home.job.lowestBid}">Lowest Bid</th>
 			</tr>
 
 			<tr th:if="${inactiveJobs.isEmpty()}">
-				<td colspan="2">No Jobs Available</td>
+				<td colspan="2" th:text="#{home.job.none}">No Jobs Available</td>
 			</tr>
 			<tr class="inactive_item" th:each="job : ${inactiveJobs}">
 				<td><span th:text="${job.id}"></span></td>
@@ -142,12 +139,9 @@
 		    }
 		});
 	</script>
-	<footer>
-		<span th:with="currentUrl=(${@currentUrlWithoutParam.apply('lang')})">
-			<a th:href="@{${currentUrl}(lang=ie)}"><i>English</i></a>
-		</span>
-		<span th:with="currentUrl=(${@currentUrlWithoutParam.apply('lang')})">
-			<a th:href="@{${currentUrl}(lang=ru)}"><i>Russian</i></a>
-		</span>
-	</footer>
 </body>
+<footer>
+	<p th:text=#{language.change}>You can change the language here:</p>
+	<a th:text="#{language.russian}" th:href="@{?lang=ru}">Russian<i class="flag-icon flag-icon-ua"></i></a>&nbsp;
+	<a th:text="#{language.english}" th:href="@{?lang=ie}">English<i class="flag-icon flag-icon-ie"></i></a>
+</footer>

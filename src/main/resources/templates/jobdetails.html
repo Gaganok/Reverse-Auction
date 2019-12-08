@@ -9,21 +9,21 @@
 <body>
 	<div class= "main_menu">
 		<h2>
-			<span th:remove="tag">Welcome </span>
+			<span th:text="#{welcome}" th:remove="tag">Welcome </span>
     		<small th:text="${userName}" >name</small>
 		</h2>
 		<ul>
-		  <li><a class="active" href="/home">Home</a></li>
-		  <li><a href="/job">Create Job</a></li>
+		  <li><a th:text="#{home.home}" class="active" href="/home">Home</a></li>
+		  <li><a th:text="#{home.newJob}" href="/job">Create Job</a></li>
 		</ul>
 	</div>
 	
 	<table>
 		<tbody>
 			<tr>
-				<th>ID</th>
-				<th>Job Name</th>
-				<th>Description</th>
+				<th th:text="#{home.job.id}">ID</th>
+				<th th:text="#{home.job.name}">Job Name</th>
+				<th th:text="#{home.job.description}">Description</th>
 			</tr>
 			<tr>
 	        	<td><span th:text="${job.id}"></span></td>
@@ -31,14 +31,14 @@
 	            <td><span th:text="${job.description}"></span></td>
 	        </tr>
 	        <tr>
-				<th>Posted By</th>
+				<th th:text="#{job.details.postedBy}">Posted By</th>
 			</tr>
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Surname</th>
-				<th>Phone</th>
-				<th>Email</th>
+				<th th:text="#{job.details.user.Id}">ID</th>
+				<th th:text="#{job.details.user.name}">Name</th>
+				<th th:text="#{job.details.user.surname}">Surname</th>
+				<th th:text="#{job.details.user.phone}">Phone</th>
+				<th th:text="#{job.details.user.email}">Email</th>
 			</tr>
 			<tr>
 				<td><span th:text="${job.user.id}"></span></td>
@@ -48,12 +48,12 @@
 	            <td><span th:text="${job.user.email}"></span></td>
 			</tr>
 			
-			<tr>
-				<th>Bid ID</th>
-				<th>Bid Value</th>
-				<th>User Name</th>
-				<th>User Surname</th>
-				<th>User Email</th>
+			<tr th:if="${job.bids != null}">
+				<th th:text="#{job.details.bid.id}">Bid ID</th>
+				<th th:text="#{job.details.bid.value}">Bid Value</th>
+				<th th:text="#{job.details.bid.user.name}">User Name</th>
+				<th th:text="#{job.details.bid.user.surname}">User Surname</th>
+				<th th:text="#{job.details.bid.user.email}">User Email</th>
 			</tr>
 			<tr th:each="bid : ${job.bids}">
 	        	<td><span th:text="${bid.id}"></span></td>
@@ -64,11 +64,11 @@
 	        </tr>
 			
 			<tr>
-				<th>Lowest Bid</th>
+				<th th:text="#{home.job.lowestBid}">Lowest Bid</th>
 			</tr>
-			<tr>
+			<tr th:if="${job.lowestBid != null}">
 				<td><span th:text="${job.lowestBid.value}"></span></td>
-	            <th> By </th>
+	            <th th:text="#{job.details.bid.by}"> By </th>
 	            <td><span th:text="${job.lowestBid.user.name}"></span></td>
 	            <td><span th:text="${job.lowestBid.user.surname}"></span></td>
 	            <td><span th:text="${job.lowestBid.user.email}"></span></td>
@@ -77,4 +77,9 @@
 	</table>
 
 </body>
+<footer>
+	<p th:text=#{language.change}>You can change the language here:</p>
+	<a th:text="#{language.russian}" th:href="@{jobdetails?lang=ru}">Russian<i class="flag-icon flag-icon-ua"></i></a>&nbsp;
+	<a th:text="#{language.english}" th:href="@{jobdetails?lang=ie}">English<i class="flag-icon flag-icon-ie"></i></a>
+</footer>
 
